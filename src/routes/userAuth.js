@@ -1,7 +1,9 @@
 const express=require('express');
 const authRouters=express.Router();
-const {register,login,logout}=require('../controllers/userAuthents')
-const usermiddleware=require('../middleware/usermiddleware')
+const {register,login,logout,adminRegister}=require('../controllers/userAuthents')
+const usermiddleware=require('../middleware/usermiddleware');
+const adminmiddleware=require('../middleware/adminmiddleware');
+
 
 //register
 authRouters.post('/register',register);
@@ -11,5 +13,7 @@ authRouters.post('/login',login);
 authRouters.post('/logout',usermiddleware,logout);
 //getprofile
 // authRouters.post('/getprofile',getprofile);
+//adminregister
+authRouters.post('/admin/register',adminmiddleware,adminRegister);
 
 module.exports=authRouters;
