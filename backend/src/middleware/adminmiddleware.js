@@ -12,13 +12,12 @@ const adminmiddleware=async(req,res,next)=>{
     if(!token) throw new Error("invalid request");
 
     const payload=await JWT.verify(token,process.env.JWT_KEY);
-    console.log(payload);
-    console.log(payload.role)
+    
  
     if(!payload)throw new Error("invalid token");
      const{_id}=payload;
     if(!_id) throw new Error("invalid token");
-    console.log(payload.role);
+  
     if(payload.role!='admin'){
         throw new Error ('u r not admin')
     }
@@ -33,6 +32,7 @@ const adminmiddleware=async(req,res,next)=>{
     if(!user)throw new Error("User doesnot exist");
     
      req.user=user;
+     console.log(user);
      next();
 
 

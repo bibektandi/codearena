@@ -5,6 +5,7 @@ const main=require('./config/db')
 const cookieParser=require('cookie-parser')
 const auth_routers=require('./routes/userAuth')
 const client=require('./config/redis');
+const problemRout=require('./routes/problemcreat');
 
 
 
@@ -13,6 +14,8 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/user',auth_routers);
+app.use('/problem',problemRout)
+
 
 
 const startserver=async()=>{

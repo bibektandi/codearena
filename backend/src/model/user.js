@@ -32,14 +32,25 @@ const Userschema= new Schema({
        default:'user'
     },
     problemSolve:{
-       type:[String]
+       type:[{
+         type:Schema.Types.ObjectId,
+         ref:'problem'
+    }],
+       unique:true
     },
     password:{
-        type:String
+        type:String,
+        required:true
     }
 },{
     timestamps:true
 });
+ Userschema.post('findOneAndDelete',async function(userInfo){
+    if(userInfo){
+        await mongoose.model('submission').deleteMany({userid:userInfo._id})
+    }
+});
+
 
 const User=mongoose.model("user",Userschema);
 module.exports=User;

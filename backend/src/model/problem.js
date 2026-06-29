@@ -12,10 +12,12 @@ const problemSchema=new Schema({
     },
     difficulty:{
      type:String,
+     enum:['easy','medium','hard'],
      required:true
     },
     tags:{
     type:String,
+    enum:['array','linkedList','graph','dp'],
     required:true,
     },
     Visibletestcases:[

@@ -14,7 +14,7 @@ const usermiddleware=async(req,res,next)=>{
 
     const{_id}=payload;
     if(!_id) throw new Error("invalid token");
-    const user=User.findById({_id});
+    const user=await User.findById({_id});
     if(!user)throw new Error("User doesnot exist");
     
     //check for redis bloacklist
@@ -22,12 +22,13 @@ const usermiddleware=async(req,res,next)=>{
      if(IsBlocked) throw  new Error('invalid token');
 
      req.user=user;
+   
      next();
 
 
   }
   catch(error){
-   res.send(error);
+   res.send('error'+error.message);
   }
 }
 module.exports=usermiddleware;
