@@ -17,9 +17,18 @@ const register=async (req,res)=>{
     const user=await User.create(req.body);
     
     const token=JWT.sign({_id:user._id,emailId:emailId,role:user.role},process.env.JWT_KEY,{expiresIn:60*60});//here in second
+    
+    const reply={
+      firstName:user.firstName ,
+      emailId:user.emailId,
+      _id:user._id
 
+    }
     res.cookie('token',token,{maxAgae:60*60*1000})//here in ms
-    res.status(201).send('user registered_successfully');
+    res.status(201).json({
+      user:reply,
+      message:"registered successfully"
+    })
     
 
   }
@@ -45,9 +54,18 @@ const login=async(req,res)=>{
     if(!good){
         throw new Error("invalid credential");
     }
+    const reply={
+      firstName:user.firstName ,
+      emailId:user.emailId,
+      _id:user._id
+
+    }
     const token=JWT.sign({_id:user._id,emailId:emailId,role:user.role},process.env.JWT_KEY,{expiresIn:60*60});
     res.cookie('token',token,{maxAge:60*60*1000});
-    res.status(201).send("login successfully");
+    res.status(201).json({
+      user:reply,
+      message:"login successfully"
+    });
     }
     catch(err){
       res.send("error is :"+err);

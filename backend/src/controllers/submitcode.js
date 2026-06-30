@@ -1,9 +1,9 @@
-const Problem = require("../models/problem");
-const Submission = require("../models/submission");
-const User = require("../models/user");
+const Problem = require("../model/problem");
+const Submission = require("../model/submission");
+const User = require("../model/user");
 const {getLanguageById,SubmitBatch,SubmitToken} = require("../utils/problemUtility");
 
-const submitcode=(req,res)=>{
+const submitcode=async(req,res)=>{
     try{
         const userid=req.user._id;
         const problemid=req.params.id;
@@ -96,7 +96,7 @@ const submitcode=(req,res)=>{
     }
 }
 
-const runcode=(req,res)=>{
+const runcode=async(req,res)=>{
      try{
         const userid=req.user._id;
         const problemid=req.params.id;

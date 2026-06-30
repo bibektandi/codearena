@@ -13,6 +13,6 @@ problemRout.delete('/delete/:id',adminmiddleware,deleteproblem);
 problemRout.get('/problembyid/:id',usermiddleware,getproblembyid);
 problemRout.get('/getallproblem',usermiddleware,getallproblem);
 problemRout.get("/problemSolvedByUser",usermiddleware, solvedAllProblembyUser);
-problemRout.get("submittedProblem/:pid",usermiddleware,submittedProblem);
+problemRout.get("/submittedProblem/:pid",usermiddleware,submittedProblem);
 
 module.exports=problemRout;
